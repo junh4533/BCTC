@@ -1,3 +1,42 @@
 body{
-    background-color: rgb(61, 1, 36);
+    background-color: rgb(238, 199, 222);
 }
+
+.box{
+    position: relative;
+    margin-top: 15vh;
+  }
+
+#form_container{
+    padding-top: 10px;
+  }
+
+
+.tab-content.jumbotron {
+    border-radius: 0 0 .3rem .3rem;
+    max-height:70vh;
+  } 
+
+.center_button{
+    text-align:center;
+    display: block;
+}
+
+/* bootstrap */
+.col-8{
+    text-align: center;
+  } 
+  #start{
+    height: 77%;
+  }
+  #center{
+    height: 10%;
+  }
+  #end{
+    height: 13%;
+  }
+  
+  .row{
+    margin-right: 0;
+    margin-left: 0;
+  }

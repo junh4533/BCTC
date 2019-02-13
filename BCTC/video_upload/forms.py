@@ -1,5 +1,8 @@
-class VideoForm(forms.ModelForm)
+from django import forms
+from .models import Document
+
+class DocumentForm(forms.ModelForm):
     class Meta:
-        model=VideoForm
-        fields=["name","videofile"]
+        model = Document
+        fields = ('description', 'document', )
         

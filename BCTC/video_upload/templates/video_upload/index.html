@@ -1,23 +1,15 @@
 {% extends 'video_upload/layout.html' %} <!-- Links layout.html as a HTML template -->
-
+{% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
-
-    {% for video in videos %}
-        {{video.file_name}}
-    {% endfor %}
-
-    <h1>Video Uploader</h1>
-        <form enctype="multipart/form-data" method="POST" action="">
-        {%csrf_token%}
-        {{form.as_p}}
-            <input type="submit" value="upload"/>
-            </form> 
-
-            <br><br>
-            <video width='400'controls>
-            <source src='{{MEDIA_URL}}{{videofile}}' type='video/mp4'>
-            Your Browser does not support the video tag.
-            </video>
-            <br><br>
-        </p>
+    {% if user.is_authenticated%}    <!--check for login-->
+        <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}  <!--crisp af form -->
+    <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}"> Login </a> 
+{% endif %}
 {% endblock %}

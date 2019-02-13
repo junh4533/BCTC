@@ -14,11 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.contrib.auth import views as auth_views
+from django.urls import path, include
 from django.conf.urls import url, include
+
 
 #connect to the url.py in the app
 urlpatterns = [
     url(r'^$', include('video_upload.urls')), #directs user to the home page without specifying home
     url(r'^admin/', admin.site.urls), #r=route ^=start with $=end with
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
