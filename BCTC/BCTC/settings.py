@@ -25,7 +25,7 @@ SECRET_KEY = 'c_4vb7yq)$d-=zks4n#%mlo+f2)z43*4xz0_hai&zxtp!bu_xb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] ############# NOT SECURE
 
 
 # Application definition
@@ -127,5 +127,9 @@ STATIC_URL = '/static/'
 # login 
 LOGIN_REDIRECT_URL = 'index'
 
+#logout
+LOGOUT_REDIRECT_URL = 'index'
+
 #bootstrap form
 CRISPY_TEMPLATE_PACK ='bootstrap4'
+

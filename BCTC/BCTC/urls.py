@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf.urls import url, include
-
+from django.views.generic.base import TemplateView
 
 #connect to the url.py in the app
+#r=route ^=start with $=end with
 urlpatterns = [
     url(r'^$', include('video_upload.urls')), #directs user to the home page without specifying home
-    url(r'^admin/', admin.site.urls), #r=route ^=start with $=end with
-    path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^admin/', admin.site.urls), 
+    url(r'^accounts/', include('django.contrib.auth.urls')), #login and logout
 ]

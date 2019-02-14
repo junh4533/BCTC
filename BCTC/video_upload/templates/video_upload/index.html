@@ -8,8 +8,9 @@
     {{ form|crispy }}  <!--crisp af form -->
     <button type="submit" class="btn btn-primary">Upload</button>
     </form>
+    <a href="{% url 'logout' %}">logout</a> <!-- logOUT button -->
     {% else %}
         <p>You are not logged in</p>
-        <a href="{% url 'login' %}"> Login </a> 
+        <a href="{% url 'login' %}"> Login </a> <!-- logIN button -->
 {% endif %}
 {% endblock %}
