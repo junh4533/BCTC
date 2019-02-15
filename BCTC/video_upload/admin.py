@@ -1,5 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Document
-admin.site.register(Document) #import the Videos model from models.py
+
+admin.site.register(Document) #import the Document model from models.py

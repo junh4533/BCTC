@@ -12,7 +12,10 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+
+looks at the requested url and decides which function to run in views.py 
 """
+from video_upload import views
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
@@ -22,7 +25,9 @@ from django.views.generic.base import TemplateView
 #connect to the url.py in the app
 #r=route ^=start with $=end with
 urlpatterns = [
-    url(r'^$', include('video_upload.urls')), #directs user to the home page without specifying home
+    url(r'^$', include('video_upload.urls')),
     url(r'^admin/', admin.site.urls), 
     url(r'^accounts/', include('django.contrib.auth.urls')), #login and logout
+    # url(r'^$', views.index), #runs the index function
+    # url(r'^test', views.test),
 ]

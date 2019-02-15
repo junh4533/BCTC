@@ -56,10 +56,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'BCTC.urls'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,10 +127,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # login 
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '../../'
 
 #logout
-LOGOUT_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = '../../'
 
 #bootstrap form
 CRISPY_TEMPLATE_PACK ='bootstrap4'

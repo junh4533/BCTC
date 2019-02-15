@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import DocumentForm 
 import os
+from django.views.generic import CreateView
+from .forms import DocumentForm
 
 # Create your views here.
 def index(request):
-    print(request.method)
     if request.method == 'POST':
         #ping
         hostname = "10.30.126.35" 
@@ -14,16 +14,21 @@ def index(request):
         #check ping response
         if response == 0:
             print(hostname, 'is up!')
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                # return redirect('index')
+                return render(request, 'video_upload/index.html')
         else:
             print(hostname, 'is down!')
-
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return render(request, 'video_upload/index.html') # placeholder for homepage/index      
+            return HttpResponse("<h1>Selected TV is not online</h1>")       
     else:
         form = DocumentForm()
-        return render(request, 'video_upload/index.html', {
-            'form': form
-        })
+    return render(request, 'video_upload/index.html', {
+        'form': form
+    })
+
+
+
+
 

@@ -8,5 +8,5 @@ from django.conf import settings
 
 #load methods from views.py
 urlpatterns = [
-    url(r'^$', views.index, name='index') #load a method called index from views.py
+    url(r'^$', views.index, name='index'), #load a method called index from views.py
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

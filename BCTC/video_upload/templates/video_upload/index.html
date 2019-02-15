@@ -1,16 +1,54 @@
 {% extends 'video_upload/layout.html' %} <!-- Links layout.html as a HTML template -->
 {% load static %}
 {% load crispy_forms_tags %}
+{% comment %} {% url 'views.index' %} {% endcomment %}
+
 {% block content %}
     {% if user.is_authenticated%}    <!--check for login-->
-        <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|crispy }}  <!--crisp af form -->
-    <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
-    <a href="{% url 'logout' %}">logout</a> <!-- logOUT button -->
+
+        <div class="row">
+            <div class="container col-2 col-lg-4"></div>
+
+            <div class="container col-8 col-lg-4 box">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#upload">Upload File</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#view_videos">View existing videos</a>
+                    </li>
+                </ul>
+
+                
+                <div class="tab-content jumbotron" id="form_container">
+                    <!-- upload pane -->
+                    <div id="upload" class="container tab-pane active"><br>
+                        <h1>Upload</h1>
+                        <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                            {{ form.as_p }}
+                             <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+
+                    <!-- view existing videos pane -->
+                    <div id="view_videos" class="container tab-pane"><br>
+                        <h1>View</h1>
+                        <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                            
+                        </form>
+                    </div>
+
+                    <a href="{% url 'logout' %}">logout</a> <!-- logOUT button -->
+                </div>
+
+            </div>
+
+            <div class="container col-2 col-lg-4"></div>
+        </div>
     {% else %}
         <p>You are not logged in</p>
         <a href="{% url 'login' %}"> Login </a> <!-- logIN button -->
-{% endif %}
+    {% endif %}
 {% endblock %}
