@@ -21,6 +21,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf.urls import url, include
 from django.views.generic.base import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 #connect to the url.py in the app
 #r=route ^=start with $=end with
@@ -28,6 +30,4 @@ urlpatterns = [
     url(r'^$', include('video_upload.urls')),
     url(r'^admin/', admin.site.urls), 
     url(r'^accounts/', include('django.contrib.auth.urls')), #login and logout
-    # url(r'^$', views.index), #runs the index function
-    # url(r'^test', views.test),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

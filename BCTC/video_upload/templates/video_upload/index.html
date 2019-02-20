@@ -1,7 +1,4 @@
 {% extends 'video_upload/layout.html' %} <!-- Links layout.html as a HTML template -->
-{% load static %}
-{% load crispy_forms_tags %}
-{% comment %} {% url 'views.index' %} {% endcomment %}
 
 {% block content %}
     {% if user.is_authenticated%}    <!--check for login-->
@@ -29,18 +26,29 @@
                         <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
                             {{ form.as_p }}
                              <button type="submit" class="btn btn-primary">Upload</button>
+                             </p>
                         </form>
                     </div>
 
                     <!-- view existing videos pane -->
                     <div id="view_videos" class="container tab-pane"><br>
                         <h1>View</h1>
-                        <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
-                            
-                        </form>
+                        
+                        <select id="selected_tv" onchange="dropdown_change()">
+                            <option value="" >--Select a TV--</option>
+                            <option value="tv1" >TV1</option>
+                            <option value="tv2">TV2</option>
+                             <option value="tv3">TV3</option>
+                            <option value="tv4">TV4</option> 
+                        </select>
+                        
+                        <video id="tv_video" width="320" height="130" controls="controls">
+                            <source id="player" src="" type="video/mp4" />
+                            Hello
+                        </video>
                     </div>
 
-                    <a href="{% url 'logout' %}">logout</a> <!-- logOUT button -->
+                    <a href="{% url 'logout' %}">logout</a> <!-- log OUT button -->
                 </div>
 
             </div>
@@ -49,6 +57,6 @@
         </div>
     {% else %}
         <p>You are not logged in</p>
-        <a href="{% url 'login' %}"> Login </a> <!-- logIN button -->
+        <a href="{% url 'login' %}"> Login </a> <!-- log IN button -->
     {% endif %}
 {% endblock %}

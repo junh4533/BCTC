@@ -8,7 +8,7 @@ from .forms import DocumentForm
 def index(request):
     if request.method == 'POST':
         #ping
-        hostname = "10.30.126.35" 
+        hostname = "10.30.126.35" #long shing's IP
         response = os.system("ping -c 1 " + hostname) # ping once at hostname
         
         #check ping response
@@ -18,7 +18,7 @@ def index(request):
             if form.is_valid():
                 form.save()
                 # return redirect('index')
-                return render(request, 'video_upload/index.html')
+                return render(request, 'video_upload/success.html')
         else:
             print(hostname, 'is down!')
             return HttpResponse("<h1>Selected TV is not online</h1>")       
