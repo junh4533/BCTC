@@ -1,10 +1,11 @@
-from django.conf.urls import url, include
-from . import views
+# app url
 
-#regex:
-    #r=route ^=start with $=end with nothing
+from django.conf.urls import url, include
+from django.urls import path
+from . import views
 
 #load methods from views.py
 urlpatterns = [
-    url(r'^$', views.index, name='index'), #load a method called index from views.py
+    path('', views.index, name='index'), #load a method called index from views.py
+    path('video/', views.video, name='video'), #load a method called index from views.py
 ]

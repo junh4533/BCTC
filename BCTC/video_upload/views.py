@@ -28,6 +28,10 @@ def index(request):
         'form': form
     })
 
+def video(request):
+    return render(request, 'video_upload/video.html')
+    # print('hello')
+
 
 
 

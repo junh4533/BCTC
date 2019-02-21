@@ -1,13 +1,11 @@
-function dropdown_change(){
-    console.log("JS running");
-    player = document.getElementById('player');
-    dropdown =  document.getElementById('selected_tv');
-    tv = document.getElementById('tv_video');
-    // selected_tv = dropdown.options[selected_tv.selectedIndex].value;
-    selected_tv = dropdown.value;
-    player.src = 'media/videos/' + selected_tv + '.mp4';
-    tv.load();
+// // $.getJSON('http://localhost:8000/getData/' + x +'/', function (serverdata) { 
+// //     console.log('function ran')})
 
-}
+// // $.getJSON('http://localhost:8000/getData/' + x +'/');
 
-
+// function load_video(selected_tv){
+//     tv = document.getElementById('tv_video');
+//     player = document.getElementById('player');
+//     player.src = 'media/videos/' + selected_tv + '.mp4';
+//     tv.load();
+// }

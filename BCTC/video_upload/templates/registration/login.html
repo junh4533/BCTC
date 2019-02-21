@@ -3,21 +3,23 @@
 {% comment %} {%block title%} Login {%endblock%} {% endcomment %}
 
 {% block content %}
-
+<div class="tint"></div>
 <div class="row">
   <div class="container col-2 col-lg-4"></div>
 
   <div class="container col-8 col-lg-4 box">
 
-      <div class="tab-content jumbotron" id="form_container">
-        <h2>Login</h2>
+      <div class="tab-content jumbotron form_container"  id="login_jumbo">
+        <div id="header">
+          <h2>Mass Portal</h2>
+        </div>
+        <img src="../../static/images/bearcat2.png" >
         <form method="post">
           {% csrf_token %} <!-- for security -->
           {{ form|crispy }} 
           <button type="submit" class="btn btn-primary">Login</button>
         </form>    
       </div>
-      
   </div>
 
   <div class="container col-2 col-lg-4"></div>
