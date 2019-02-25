@@ -48,19 +48,18 @@ body{
   display: block;
 }
 
-/* #tv_video{
+#tv_video{
   position: fixed;
   right: 0;
   bottom: 0;
   min-width: 100%; 
   min-height: 100%;
-} */
+}
 
 /* bootstrap */
 .col-8{
   text-align: center;
 } 
-
 
 .row{
 margin-right: 0;

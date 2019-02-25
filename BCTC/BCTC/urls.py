@@ -11,8 +11,7 @@ from django.conf.urls.static import static
 
 #connect to the url.py in the app
 urlpatterns = [
-    url(r'^$', include('video_upload.urls')),
-    url(r'^video/', include('video_upload.urls')),
+    url(r'', include('video_upload.urls')),
     url(r'^admin/', admin.site.urls), 
     url(r'^accounts/', include('django.contrib.auth.urls')), #login and logout   
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
