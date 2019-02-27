@@ -7,10 +7,14 @@ from .models import Document
 
 # Create your views here.
 def index(request):
+    # if request.is_ajax():
+    #     #do something
+    #     request_data = request.POST
+    #     print("ok")
     if request.method == 'POST':
         #ping
         hostname = "10.30.126.35" #long shing's IP
-        response = os.system("ping -c 1 " + hostname) # ping once at hostname
+        response = os.system("ping " + hostname +  " -n 1 -w 1") # ping once at hostname
         
         #check ping response
         if response == 0:
@@ -21,7 +25,7 @@ def index(request):
                 return render(request, 'video_upload/success.html')
         else:
             print(hostname, 'is down!')
-            return HttpResponse("<h1>Selected TV is not online</h1>")       
+            return HttpResponse("<h1>Selected TV is not online</h1>")
     else:
         form = DocumentForm()
     return render(request, 'video_upload/index.html', {
@@ -50,8 +54,6 @@ def index(request):
 #         'form': form
 #     })
             
-
-
 def video1(request):
     return render(request, 'video_upload/video1.html')
     

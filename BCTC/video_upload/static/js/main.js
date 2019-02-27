@@ -15,3 +15,17 @@ function previous(){
     window.location.href = "../accounts/login/";
 }
 
+// $(document).ready(function() {
+//     $.ajax({
+//         method: 'GET',
+//         url: 'http://10.30.122.76:8000',
+//         data: {'yourJavaScriptArrayKey': yourJavaScriptArray},
+//         success: function (data) {
+//              //this gets called when server returns an OK response
+//              alert("it worked!");
+//         },
+//         error: function (data) {
+//              alert("it didnt work");
+//         }
+//     });
+// });
