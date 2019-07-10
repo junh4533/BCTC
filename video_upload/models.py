@@ -2,7 +2,6 @@ from django.db import models
 from datetime import datetime
 import os
 
-
 tv_choices = (
     ('TV1','TV1'),
     ('TV2','TV2'),
