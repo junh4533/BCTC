@@ -32,7 +32,17 @@
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%">TV2</div>
                             {% else %}
                                 <div id="tv2" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV2</div>
+                            {% endif %} 
+                            {% if response3 == 0 %}
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%">TV3</div>
+                            {% else %}
+                                <div id="tv2" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV3</div>
                             {% endif %}
+                            {% if response4 == 0 %}
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%">TV4</div>
+                            {% else %}
+                                <div id="tv2" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV4</div>
+                            {% endif %}  
                         </div>
                         <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
                              {{ form|crispy }} 
