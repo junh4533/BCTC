@@ -1,103 +1,115 @@
-{% extends 'video_upload/layout.html' %} <!-- Links layout.html as a HTML template -->
+{% extends 'video_upload/layout.html' %}
+<!-- Links layout.html as a HTML template -->
 {% load crispy_forms_tags %}
 {% block content %}
-    {% if user.is_authenticated%}    <!--check for login-->
+{% if user.is_authenticated%}
 
+<div class="row">
+
+    <div class="col-2 sidebar">
+        <div class='tint'> </div>
+        <div id="barheader">
+<br>
+            <h5>Welcome back, <br> Joe</h5>
+        </div>
+        <a href="{% url 'logout' %}">logout</a> <!-- log OUT button -->
+
+    </div>
+
+    <div class="col-10">
+        <br> <br> <br>
         <div class="row">
-            <div class="container col-2 col-lg-3"></div>
-
-            <div class="container col-8 col-lg-6 box">
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs nav-fill" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#upload">Upload File</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#view_videos">View existing videos</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content jumbotron form_container">
-                     <!-- upload pane -->
-                    <div id="upload" class="container tab-pane active"><br>
-                        <h1>Upload</h1>
-                        <div class="progress">
-                            {% if response == 0 %}
-                                <div id="tv1" class="progress-bar bg-success" role="progressbar" style="width: 25%">TV1</div>
-                            {% else %}
-                                <div id="tv1" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV1</div>
-                            {% endif %}
-                            {% if response2 == 0 %}
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%">TV2</div>
-                            {% else %}
-                                <div id="tv2" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV2</div>
-                            {% endif %} 
-                            {% if response3 == 0 %}
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%">TV3</div>
-                            {% else %}
-                                <div id="tv2" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV3</div>
-                            {% endif %}
-                            {% if response4 == 0 %}
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%">TV4</div>
-                            {% else %}
-                                <div id="tv2" class="progress-bar bg-danger" role="progressbar" style="width: 25%">TV4</div>
-                            {% endif %}  
+            <div class="col-12">
+                <div class="card-deck">
+                    <div class="card rounded">
+                        <div class="card-header">STATUS</div>
+                        <div class="card-body">    
+                        {% if response == 0 %}
+                        TV 1 <span class="dot dot-online"></span>
+                        {% else %}
+                        TV 1 <span class="dot dot-offline"></span>
+                        {% endif %} <br>
+                        {% if response2 == 0 %}
+                        TV 2 <span class="dot dot-online"></span>
+                        {% else %}
+                        TV 2 <span class="dot dot-offline"></span>
+                        {% endif %} <br>
+                        {% if response3 == 0 %}
+                        TV 3<span class="dot dot-online"></span>
+                        {% else %}
+                        TV 3 <span class="dot dot-offline"></span>
+                        {% endif %} <br>
+                        {% if response4 == 0 %}
+                        TV 4<span class="dot dot-online"></span>
+                        {% else %}
+                        TV 4 <span class="dot dot-offline"></span>
+                        {% endif %}
                         </div>
-                        <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
-                             {{ form|crispy }} 
-                             <button type="submit" class="btn btn-primary">Upload</button>
-                             </p>
-                        </form>
                     </div>
-
-                    <!-- view existing videos pane -->
-                    <div id="view_videos" class="container tab-pane"><br>
-                        <h1>View</h1>
-                        <form>
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Select a TV
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="video1">TV 1</a>
-                                <a class="dropdown-item" href="video2">TV 2</a>
-                                <a class="dropdown-item" href="video3">TV 3</a>
-                                <a class="dropdown-item" href="video4">TV 4</a>
-                            </div>
+<!-- view existing videos pane -->
+                    <div class="card">
+                        <div class="card-header">View</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        Select a TV
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="video1">TV 1</a>
+                                        <a class="dropdown-item" href="video2">TV 2</a>
+                                        <a class="dropdown-item" href="video3">TV 3</a>
+                                        <a class="dropdown-item" href="video4">TV 4</a>
+                                    </div>
+                                </div>
+                                <br>
+                                {% comment %} <video id="tv_video" width="420" height="315" controls="controls" autoplay loop>
+                                    <source id="player" src="" type="video/mp4" />
+                                </video> {% endcomment %}
+                        
                         </div>
-                        {% comment %} <br> {% endcomment %}
-                        {% comment %} <video id="tv_video" width="700" height="400" controls="controls" autoplay loop>
-                            <source id="player" src="" type="video/mp4" />
-                            Hello
-                        </video> {% endcomment %}
                     </div>
-
-                    <a href="{% url 'logout' %}">logout</a> <!-- log OUT button -->
                 </div>
-
             </div>
-
-            <div class="container col-2 col-lg-3"></div>
         </div>
 
+        <br> <br>
+
+        <div class="row">
+            <div class="col-12">
+                {% comment %} <div class="container"> {% endcomment %}
+                <div class="card">
+                    <div class="card-header">Upload</div>
+                    <div class="card-body">
+                    <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        </p>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% else %}
         <script>
-            $(document).ready(function() {
-    console.log("running js");
-    $.ajax({
-        url: 'https://10.30.126.35',
-  
-        type: 'get', // This is the default though, you don't actually need to always mention it
-        success: function(data) {
-            console.log(data);
-        },
-        failure: function(data) { 
-            console.log('Got an error dude');
-        }
-    });
-});
+            window.location.href = "../accounts/login/"
         </script>
-    {% else %}
-        <script>window.location.href = "../accounts/login/"</script>
-    {% endif %}
-{% endblock %}
+        {% endif %}
+        {% endblock %}
+
+        {% comment %}
+        <div class="row">
+            <div class="col-2"> </div>
+            <div class="col-10">
+
+                <h1>Upload</h1>
+
+                <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                    </p>
+                </form>
+            </div>
+        </div> {% endcomment %}

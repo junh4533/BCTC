@@ -16,18 +16,34 @@
 // }
 
 $(document).ready(function() {
-    console.log("running js");
-    $.ajax({
-        // url: '10.30.126.35',
-        url: '/localhost:8000',
-        type: 'get', // This is the default though, you don't actually need to always mention it
-        success: function(data) {
-            console.log(data);
-        },
-        failure: function(data) { 
-            console.log('Got an error dude');
-        }
-    });
+    console.log("running jssss");
+    // $.ajax({
+    //     // url: '10.30.126.35',
+    //     url: '/localhost:8000',
+    //     type: 'get', // This is the default though, you don't actually need to always mention it
+    //     success: function(data) {
+    //         console.log(data);
+    //     },
+    //     failure: function(data) { 
+    //         console.log('Got an error dude');
+    //     }
+    // });
+
+    var i = document.getElementById("player");
+    console.log(i);
+
+    // go full-screen
+    if (i.requestFullscreen) {
+        i.requestFullscreen();
+    } else if (i.webkitRequestFullscreen) {
+        i.webkitRequestFullscreen();
+    } else if (i.mozRequestFullScreen) {
+        i.mozRequestFullScreen();
+    } else if (i.msRequestFullscreen) {
+        i.msRequestFullscreen();
+    }
+
+
 });
 // $(document).ready(function() {
 //     $.ajax({

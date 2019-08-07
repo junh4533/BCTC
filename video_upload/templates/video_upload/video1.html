@@ -1,7 +1,13 @@
 {% extends 'video_upload/layout.html' %} <!-- Links layout.html as a HTML template -->
 {% block content %}
     {% if user.is_authenticated%}    <!--check for login-->
-        <script type="text/javascript" src="http://livejs.com/live.js"></script>
+        <script type="text/javascript">
+            {% comment %} setTimeout(function(){
+                location = ''
+            },100000) {% endcomment %}
+       
+        </script> 
+        
         <video id="tv_video" controls autoplay loop>
             <source id="player" src="../../media/videos/TV1.mp4" type="video/mp4"/>
             {% comment %} <source id="player" src="{{ Document.document.url }}" type="video/mp4"/> {% endcomment %}
