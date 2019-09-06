@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR,'\\\\10.20.124.21\\reports\\MassPortalVids\\TV1\\')
+# MEDIA_URL = "\\\\10.20.124.21\\reports\\MassPortalVids\\TV1\\"
   
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

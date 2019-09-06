@@ -1,0 +1,102 @@
+{% extends 'video_upload/layout.html' %}
+<!-- Links layout.html as a HTML template -->
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated%}
+
+<div class="container-fluid">
+<div class="row">
+
+    <div class="col-2 sidebar">
+        <div class='tint'> </div>
+        <div id="barheader">
+            <br>
+            <h5>Welcome back, <br> Joe</h5>
+        </div>
+        <a href="{% url 'logout' %}">logout</a> <!-- log OUT button -->
+    </div>
+
+    <div class="col-10">
+        <br>
+        <div class="row row-eq-height main_content">
+            <div class="col-2 ">
+                <div class="section-header">STATUS</div>
+                <div class="section-body status">
+                    {% if response == 0 %}
+                    TV 1 <i class="fa fa-power-off online"></i>
+                    {% else %}
+                    TV 1 <i class="fa fa-power-off offline"></i>
+                    {% endif %} <span onclick="vid1();" class="fa fa-play-circle"></span> <br>
+                    {% if response2 == 0 %}
+                    TV 2 <i class="fa fa-power-off online"></i>
+                    {% else %}
+                    TV 2 <i class="fa fa-power-off offline"></i>
+                    {% endif %}<span onclick="vid2();" class="fa fa-play-circle"></span> <br>
+                    {% if response3 == 0 %}
+                    TV 3<i class="fa fa-power-off online"></i>
+                    {% else %}
+                    TV 3 <i class="fa fa-power-off offline"></i>
+                    {% endif %} <span onclick="vid3();" class="fa fa-play-circle"></span> <br>
+                    {% if response4 == 0 %}
+                    TV 4<i class="fa fa-power-off online"></i>
+                    {% else %}
+                    TV 4 <i class="fa fa-power-off offline"></i>
+                    {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span> <br>
+                </div>
+            </div>
+
+            <!-- view existing videos pane -->
+            <div class="col-10">
+                <div class="section-header">View</div>
+                <div class="section-body">
+                    <video id="tv_video" controls autoplay loop>
+                        <source id="player" src="" type="video/mp4" />
+                        video not supported by this browser.
+                    </video>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="section-header">Upload</div>
+                <div class="section-body">
+                    <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+</div>
+
+<script>
+    function vid1() {
+        document.getElementById('tv_video').src = "../../media/videos/TV1.mp4";
+    }
+
+    function vid2() {
+        document.getElementById('tv_video').src = "../../media/videos/TV2.mp4";
+    }
+
+    function vid3() {
+        document.getElementById('tv_video').src = "../../media/videos/TV3.mp4";
+    }
+
+    function vid4() {
+        document.getElementById('tv_video').src = "../../media/videos/TV4.mp4";
+    }
+</script>
+{% else %}
+<script>
+    window.location.href = "../accounts/login/"
+</script>
+{% endif %}
+{% endblock %}

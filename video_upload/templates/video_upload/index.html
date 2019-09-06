@@ -4,112 +4,136 @@
 {% block content %}
 {% if user.is_authenticated%}
 
-<div class="row">
-
-    <div class="col-2 sidebar">
-        <div class='tint'> </div>
-        <div id="barheader">
-<br>
-            <h5>Welcome back, <br> Joe</h5>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 sidebar">
+            <div class='tint'> </div>
+            <div id="nav-header">
+                <h5>Welcome back, <br> Joe</h5>
+                <a href="{% url 'logout' %}">logout</a>
+            </div>
         </div>
-        <a href="{% url 'logout' %}">logout</a> <!-- log OUT button -->
+        <div class="col-10">
+            <div class="container-fluid">
+                <div class="row">
 
+                    <div class="col-12">
+
+                        <div class="section-header">
+                            <h3>Upload</h3>
+                        </div>
+                        <div class="section-body">
+                            <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                                {{ form|crispy }}
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+              
+                <div class="row row-eq-height">
+
+                    <div class="col-3">
+
+                        <div class="section-header">
+                            <h3>Status</h3>
+                        </div>
+                        <div id="status" class="section-body">
+                            {% if response == 0 %}
+                            TV 1 <i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 1 <i class="fa fa-power-off offline"></i>
+                            {% endif %} <span onclick="vid1();" class="fa fa-play-circle"></span> <br>
+                            {% if response2 == 0 %}
+                            TV 2 <i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 2 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid2();" class="fa fa-play-circle"></span> <br>
+                            {% if response3 == 0 %}
+                            TV 3<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 3 <i class="fa fa-power-off offline"></i>
+                            {% endif %} <span onclick="vid3();" class="fa fa-play-circle"></span> <br>
+                            {% if response4 == 0 %}
+                            TV 4<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 4 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span> <br>
+                             {% if response4 == 0 %}
+                            TV 5<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 5 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span> <br>
+                             {% if response4 == 0 %}
+                            TV 6<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 6 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
+                             {% if response4 == 0 %}
+                            TV 7<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 7 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
+                            {% if response4 == 0 %}
+                            TV 8<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 8 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
+                             {% if response4 == 0 %}
+                            TV 9<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 9 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
+                             {% if response4 == 0 %}
+                            TV 10<i class="fa fa-power-off online"></i>
+                            {% else %}
+                            TV 10 <i class="fa fa-power-off offline"></i>
+                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
+                        </div>
+
+                    </div>
+
+                    <div class="col-9">
+                        <div class="section-header">
+                            <h3>Preview</h3>
+                        </div>
+                        <div class="section-body">
+                            <video id="tv_video" controls autoplay loop>
+                                <source id="player" src="" type="video/mp4" />
+                                video not supported by this browser.
+                            </video>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="col-10">
-        <br> <br> <br>
-        <div class="row">
-            <div class="col-12">
-                <div class="card-deck">
-                    <div class="card rounded">
-                        <div class="card-header">STATUS</div>
-                        <div class="card-body">    
-                        {% if response == 0 %}
-                        TV 1 <span class="dot dot-online"></span>
-                        {% else %}
-                        TV 1 <span class="dot dot-offline"></span>
-                        {% endif %} <br>
-                        {% if response2 == 0 %}
-                        TV 2 <span class="dot dot-online"></span>
-                        {% else %}
-                        TV 2 <span class="dot dot-offline"></span>
-                        {% endif %} <br>
-                        {% if response3 == 0 %}
-                        TV 3<span class="dot dot-online"></span>
-                        {% else %}
-                        TV 3 <span class="dot dot-offline"></span>
-                        {% endif %} <br>
-                        {% if response4 == 0 %}
-                        TV 4<span class="dot dot-online"></span>
-                        {% else %}
-                        TV 4 <span class="dot dot-offline"></span>
-                        {% endif %}
-                        </div>
-                    </div>
-<!-- view existing videos pane -->
-                    <div class="card">
-                        <div class="card-header">View</div>
-                        <div class="card-body">
-                            <form>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        Select a TV
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="video1">TV 1</a>
-                                        <a class="dropdown-item" href="video2">TV 2</a>
-                                        <a class="dropdown-item" href="video3">TV 3</a>
-                                        <a class="dropdown-item" href="video4">TV 4</a>
-                                    </div>
-                                </div>
-                                <br>
-                                {% comment %} <video id="tv_video" width="420" height="315" controls="controls" autoplay loop>
-                                    <source id="player" src="" type="video/mp4" />
-                                </video> {% endcomment %}
-                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<script>
+    function vid1() {
+        document.getElementById('tv_video').src = "../../media/videos/TV1.mp4";
+    }
 
-        <br> <br>
+    function vid2() {
+        document.getElementById('tv_video').src = "../../media/videos/TV2.mp4";
+    }
 
-        <div class="row">
-            <div class="col-12">
-                {% comment %} <div class="container"> {% endcomment %}
-                <div class="card">
-                    <div class="card-header">Upload</div>
-                    <div class="card-body">
-                    <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
-                        {{ form|crispy }}
-                        <button type="submit" class="btn btn-primary">Upload</button>
-                        </p>
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    function vid3() {
+        document.getElementById('tv_video').src = "../../media/videos/TV3.mp4";
+    }
 
-
-        {% else %}
-        <script>
-            window.location.href = "../accounts/login/"
-        </script>
-        {% endif %}
-        {% endblock %}
-
-        {% comment %}
-        <div class="row">
-            <div class="col-2"> </div>
-            <div class="col-10">
-
-                <h1>Upload</h1>
-
-                <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
-                    {{ form|crispy }}
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                    </p>
-                </form>
-            </div>
-        </div> {% endcomment %}
+    function vid4() {
+        document.getElementById('tv_video').src = "../../media/videos/TV4.mp4";
+    }
+</script>
+{% else %}
+<script>
+    window.location.href = "../accounts/login/"
+</script>
+{% endif %}
+{% endblock %}

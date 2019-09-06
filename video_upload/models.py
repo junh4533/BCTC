@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
-import os
+import subprocess
+import shutil, os
 
 tv_choices = (
     ('TV1','TV1'),
@@ -24,12 +25,16 @@ class Document(models.Model):
 
     def file_path(self, tv):
         # removes the original file
-        path =  "C:\\Users\Administrator\Desktop\Django Projects\BCTC\media\\videos\\" + self.tv + ".mp4"
+        path =  "C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/" + self.tv + ".mp4"
+        # copy video files to antoher directory
+        #dst = "C:/Users/Administrator/Desktop/Django Projects/BCTC/media/test/" +self.tv +".mp4"
+        #shutil.copy(path, dst, follow_symlinks=True)
         if os.path.isfile(path):
             os.remove(path)
             print('File deleted')
+            print(self.tv)
         return 'videos/' + self.tv + ".mp4"
-    
+
     # gives the objects its file name
     def __str__(self):
         return self.tv + " (Date Uploaded: " + str(datetime.now()) + ")"

@@ -6,11 +6,30 @@ from .forms import DocumentForm
 from .models import Document
 from django.contrib.auth.decorators import login_required
 import time
+import shutil
+import subprocess
+
+
+from remrunner import runner
 
 
 # Create your views here.
 
 def index(request):
+
+    # hname = "10.30.124.80" #long shing 
+    # username = "administrator"
+
+    # r = runner.Runner(hname, username)
+
+    # rval, stdout, stderr = r.run('C:/Users/Administrator/Desktop/python_script/test.py')#hello world script
+    # if rval:
+    #     print(stderr)
+    # else:
+    #     print(stdout)
+
+    # r.close()
+
     hostname = "10.30.125.20" #long shing
     hostname2 = "10.30.125.125" #york
     hostname3 = "10.30.125.30" #ashley
@@ -34,10 +53,11 @@ def index(request):
         return render(request, 'video_upload/index.html', args)
         
     if request.method == 'POST':
-        
+        #only works for tv1
         #ping
-        hostname = "10.30.125.20"
+        hostname = "10.30.124.80"
         response = os.system("ping " + hostname +  " -n 1 -w 1") # ping once at hostname
+        print(response)
         
         #check ping response
         if response == 0:
@@ -45,36 +65,19 @@ def index(request):
             form = DocumentForm(request.POST, request.FILES)
             if form.is_valid(): 
                 form.save()
-                
-                return render(request, 'video_upload/success.html')
+                print("saved")
+                src = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/TV1.mp4"
+                dst = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/RemoteVideos/TV1.mp4"
+                shutil.copy(src, dst, follow_symlinks=True)
+                print('moved')
+                #src = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/TV1.mp4"
+                #dst = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/test/"
+            return render(request, 'video_upload/success.html')
         else:
             print(hostname, 'is down!')
             return render(request, 'video_upload/failed.html')
     # else:
     #     form = DocumentForm()
-    
-# def index(request):
-#     if request.method == 'POST':
-#         form = Document()
-#         form = DocumentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             tv == request.POST.get('TV1')
-            
-#             hostname = "10.30.126.35"
-#             response = os.system("ping -c 1 " + hostname) #ping once
-
-#             if response == 0:
-#                 print(hostname, 'is up!')
-#                 form.save()
-#                 return render(request, 'video_upload/success.html')
-#             else:
-#                 print(hostname, 'is down!')
-#                 return HttpResponse("<h1>Selected TV is not online</h1>")
-#     else:
-#         form = Document()
-#     return render(request, 'video_upload/index.html',{
-#         'form': form
-#     })
             
 def video1(request):
     return render(request, 'video_upload/video1.html')

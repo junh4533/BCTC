@@ -1,15 +1,24 @@
 body{
-  /* background-color: rgb(255, 255, 255); */
-  /* background-image: url('../images/login_bg_no_logo.png');
-  background-size: cover; */
-  /* background: rgb(158, 199, 253); */
-  /* background-image: linear-gradient(to top right, rgb(11, 45, 75), rgb(39, 77, 138)); */
   background-image:linear-gradient(to bottom left,#216e93,#21648a,#1f5881,#172d5b,#191c51);
   color:white;
+  height:100vh;
+  width:100vw;
+}
+
+
+div [class*='col-']{
+  padding: 15px 15px 15px 15px;
+}
+
+.row{
+
+}
+
+h3{
+  margin-bottom: 0;
 }
 
 .tint {
-  
   height: 100%;
   width: 100%;
   position: absolute;
@@ -20,72 +29,12 @@ body{
   z-index: -999;
 }
 
-#header{
-  /* background-color: #007bff; */
-  /* background-color: #6e00ad; */
-  height: 10%;
-}
-
-.box{
-  position: relative;
-  margin-top: 10vh;
-  color: #E5E4E2;
-}
-
-.form_container{
-  /* padding-bottom: 20px; */
-  padding:0 0 20px 0;
-}
-
-#login_jumbo{
-  box-shadow: 10px 10px rgba(17,22,34,0.6);
-}
-.form-group{
-  padding: 0 10% 0 10%;
-}
-
-.tab-content.jumbotron {
-  border-radius: 0 0 .3rem .3rem;
-  /* max-height:70vh; */
-} 
-
-.center_button{
-  text-align:center;
-  display: block;
-}
-/* 
-#tv_video{
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-} */
-
-/* bootstrap */
-.col-5{
-  text-align: center;
-  /* color: white; */
-  /* background-color: red; */
-  
-} 
-
-.row{
-margin: 0 0 0 0;
-padding: 0 0 0 0;
-z-index:999;
-}
-
-
 .sidebar {
   position: relative;
   height: 100vh;
   bottom: 0;
   left: 0;
-  /* background-color: #0074D9; */
-  /* background-color: #3f33aa; */
   background-color: rgba(22, 23, 36,.6);
-  /* color:rgb(1, 57, 105); */
   color:white;
   padding: 0 0 0 0;
   text-align:center;
@@ -94,55 +43,71 @@ z-index:999;
   z-index: 1;
 }
 
+.section-header{
+  background-color: rgb(1, 57, 105);
+  width:100%;
+  /* height:7%; */
+  /* padding: 15px 15px 15px 15px; */
+}
+.section-body{
+  background-color: rgba(255, 255, 255, 0.1);
+  width:100%;
+  /* height:100%; */
+  padding: 15px 15px 15px 15px;
+}
 
-/* #barheader {
-  color: black;
+.offline{
+  color:rgb(255, 59, 10);
+} 
+
+.online{
+  color:#01FF70;
+} 
+
+span{
+  color:#7FDBFF;
+}
+
+span:hover{
+  color: white;
+}
+
+#tv_video{
+  /* width:50vw; */
+  /* height:35vh; */
+  /* height:100%; */
+  padding: 0 0 0 0;
+  width:100%;
+  /* height:inherit; */
+}
+
+#status {
   text-align: center;
-} */
-
-.dot {
-  height:  20px;
-  width: 20px;
-  
-  border-radius: 50%;
-  display: inline-block;
+  font-size: 30px;
+  /* height:94%; */
+  /* display:inline; */
 }
 
-.dot-online{
-  background-color: green;
-}
-
-.dot-offline{
-  background-color: red;
-}
-
-.col-6{
-  
-  /* padding: 0px 15px 0px 15px; */
-}
-/* .col-12{
-
-  background-color: rgba(18, 6, 53, 0.5);
-} */
-
-.container{
-  background-image:  linear-gradient(to top right, rgb(11, 45, 75), rgba(13, 35, 133, 0.705));
-}
-.card{
-  border: none;
+/*-------------- form-------------- */
+input{
   background-color:transparent;
 }
-.card-header{
-  /* background-image:  linear-gradient(to top right, rgb(11, 45, 75), rgba(13, 35, 133, 0.705)); */
-  background-color: rgb(1, 57, 105);
-}
-.card-body{
-  /* opacity: 0.9; */
-  /* background-image:  linear-gradient(to top right, rgb(11, 45, 75), rgba(13, 35, 133, 0.1)); */
-  background-color: rgba(255, 255, 255, 0.1);
-  /* background-color:transparent; */
-}
-.rounded{
+
+.form-control{
+  background-color: transparent;
+  border: 1px solid #c2e1ff;
+  color:white;
+  max-width:12vw;
   
-  border-radius: 5px!important;
 }
+
+.form-control:focus{
+  background-color: transparent;
+  color:white;
+}
+
+form div,.form-control{
+  display: inline;
+}
+
+
