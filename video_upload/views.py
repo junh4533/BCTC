@@ -91,7 +91,6 @@ def video3(request):
 def video4(request):
     return render(request, 'video_upload/video4.html')
 
-hello
 
 
 
