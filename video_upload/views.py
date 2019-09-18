@@ -62,7 +62,6 @@ def index(request):
             # return render(request, 'video_upload/index.html',{"upload_status":upload_status,"form":form})
         else:
             print(hostname, 'is down!')
-<<<<<<< HEAD
             upload_status = "offline"
         responses = []
         #ping
@@ -108,22 +107,9 @@ def delete_tv(request):
             os.remove(local) 
             os.remove(remote) 
         return render(request, 'video_upload/delete_tv.html',{"TVName":TVName,"local":local,"remote":remote})
-=======
             return render(request, 'video_upload/failed.html')
     # else:
     #     form = DocumentForm()
-            
-def video1(request):
-    return render(request, 'video_upload/video1.html')
-    
-def video2(request):
-    return render(request, 'video_upload/video2.html')
 
-def video3(request):
-    return render(request, 'video_upload/video3.html')
-
-def video4(request):
-    return render(request, 'video_upload/video4.html')
->>>>>>> e289957ef27401a700af75cb6d7a2e6afa1828c7
 
 
