@@ -19,32 +19,27 @@
                 <div class="row">
 
                     <div class="col-12">
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        
 
                         <div class="section-header">
                             <h3>Delete a TV</h3>
                         </div>
                         <div class="section-body">
-                        {% for Television in TVs%}
-                        {% comment %} <form id="delete" action="{% url'delete_tv% }" method="GET">
-                        {% csrf_token %}
-                            <select>
-                                <option value>{{TV.tv_name}}
-                            </select>
-                            <input type="submit" value="delete" name="tv">
-                        </form> {% endcomment %}
-                        <h3>{{ Television.tv_name }}</h3>
-    
                         <form id="delete" action="" method="POST">
                         {% csrf_token %}
+                        {{ form|crispy }}
                         <a class="btn btn-danger" onclick="$('#delete').submit();"> 
                             <i class="fa fa-trash"></i>
                         </a>
-                        <a class="btn btn-danger" onclick="#">
-                            <i class="far fa-trash"></i>
                         </a>
-                        <input type="hidden" value="{{ Television.tv_id }}" name="Televison_id"> 
                         </form>
-                        {%endfor%}
                         </div>
 
                     </div>

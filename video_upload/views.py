@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import os
 from django.views.generic import CreateView
-from .forms import DocumentForm, TelevisionForm
-from .models import Document, Television
+from .forms import DocumentForm, TelevisionForm, DeleteTvForm
+from .models import Document, Television, DeleteTv
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import time
 import shutil
@@ -93,21 +94,14 @@ def add_tv(request):
 
 def delete_tv(request):
     if request.method =='GET':
-        TVs = Television.objects.all()
-        return render(request, 'video_upload/delete_tv.html',{"TVs": TVs})
+        form = DeleteTvForm
+        return render(request, 'video_upload/delete_tv.html',{"form":form})
     elif request.method =='POST':
-        # Lookup for tv name 
-        TVName = Television.objects.get(tv_id=request.POST.get('Televison_id')).tv_name 
-        # Delete TV 
-        Television.objects.get(tv_id=request.POST.get('Televison_id')).delete() 
-        # Delete video file 
-        local = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/" + TVName + r".mp4" #video file paths
-        remote = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/RemoteVideos/" + TVName + r".mp4"
-        if os.path.isfile(local):
-            os.remove(local) 
-            os.remove(remote) 
-        return render(request, 'video_upload/delete_tv.html',{"TVName":TVName,"local":local,"remote":remote})
-            return render(request, 'video_upload/failed.html')
+        tv1 = request.POST.get('TV')
+        Television.objects.get(tv_id=tv1).delete()
+        tv1 = 'deleted'
+        messages.info(request,'TV successfully deleted')
+        return redirect(delete_tv)
     # else:
     #     form = DocumentForm()
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Document, Television
+from .models import Document, Television, DeleteTv
 # from crispy_forms.helper import FormHelper
 # from crispy_forms.layout import Layout, Submit, Row
 # from crispy_forms.bootstrap import (
@@ -14,4 +14,9 @@ class TelevisionForm(forms.ModelForm):
     class Meta:
         model = Television
         fields = ('tv_name', 'tv_ip')
+
+class DeleteTvForm(forms.ModelForm):
+    class Meta:
+        model = DeleteTv
+        fields = ('TV',)
 
