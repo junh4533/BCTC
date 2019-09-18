@@ -1,17 +1,18 @@
 {% extends 'video_upload/layout.html' %}
-<!-- Links layout.html as a HTML template -->
 {% load crispy_forms_tags %}
 {% block content %}
 {% if user.is_authenticated%}
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2 sidebar">
+        <div class="col-2 sidebar" id="sidebar">
             <div class='tint'> </div>
-            <div id="nav-header">
-                <h5>Welcome back, <br> Joe</h5>
-                <a href="{% url 'logout' %}">logout</a>
-            </div>
+            <h5>Welcome back, <br> Joe</h5>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'index' %}">Home</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'add_tv' %}">Add a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'delete_tv'%}">Delete a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'logout' %}">Logout</a>
+                
         </div>
         <div class="col-10">
             <div class="container-fluid">
@@ -41,56 +42,17 @@
                             <h3>Status</h3>
                         </div>
                         <div id="status" class="section-body">
-                            {% if response == 0 %}
-                            TV 1 <i class="fa fa-power-off online"></i>
+                        {% for response in responses %}
+                            {{response.0}} {# tv name #}
+                            {% if response.1 == 0 %} {# tv ip #}
+                                 <i class="fa fa-power-off online"></i>
                             {% else %}
-                            TV 1 <i class="fa fa-power-off offline"></i>
-                            {% endif %} <span onclick="vid1();" class="fa fa-play-circle"></span> <br>
-                            {% if response2 == 0 %}
-                            TV 2 <i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 2 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid2();" class="fa fa-play-circle"></span> <br>
-                            {% if response3 == 0 %}
-                            TV 3<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 3 <i class="fa fa-power-off offline"></i>
-                            {% endif %} <span onclick="vid3();" class="fa fa-play-circle"></span> <br>
-                            {% if response4 == 0 %}
-                            TV 4<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 4 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span> <br>
-                             {% if response4 == 0 %}
-                            TV 5<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 5 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span> <br>
-                             {% if response4 == 0 %}
-                            TV 6<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 6 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
-                             {% if response4 == 0 %}
-                            TV 7<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 7 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
-                            {% if response4 == 0 %}
-                            TV 8<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 8 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
-                             {% if response4 == 0 %}
-                            TV 9<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 9 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
-                             {% if response4 == 0 %}
-                            TV 10<i class="fa fa-power-off online"></i>
-                            {% else %}
-                            TV 10 <i class="fa fa-power-off offline"></i>
-                            {% endif %}<span onclick="vid4();" class="fa fa-play-circle"></span><br>
+                                <i class="fa fa-power-off offline"></i>
+                            {% endif %} 
+                            {% with tv_name=response.0 %}
+                            <span onclick="preview_video('{{ tv_name }}')" class="fa fa-play-circle"></span> <br>
+                            {% endwith %}
+                        {% endfor %}
                         </div>
 
                     </div>
@@ -107,6 +69,20 @@
                         </div>
                     </div>
 
+                     {% if upload_status == "success" %}
+            <div class="alert alert-success">
+                <strong>Success!</strong>Video was added.
+            </div>
+            {% elif upload_status == "fail" %}
+            <div class="alert alert-danger">
+                <strong>Error!</strong>Video was not successfully added.
+            </div>
+            {% elif upload_status == "offline" %}
+            <div class="alert alert-danger">
+                <strong>Error!</strong>TV is offline.
+            </div>
+            {% endif %}
+
                 </div>
 
             </div>
@@ -115,20 +91,9 @@
 </div>
 
 <script>
-    function vid1() {
-        document.getElementById('tv_video').src = "../../media/videos/TV1.mp4";
-    }
-
-    function vid2() {
-        document.getElementById('tv_video').src = "../../media/videos/TV2.mp4";
-    }
-
-    function vid3() {
-        document.getElementById('tv_video').src = "../../media/videos/TV3.mp4";
-    }
-
-    function vid4() {
-        document.getElementById('tv_video').src = "../../media/videos/TV4.mp4";
+     function preview_video(video) {
+        document.getElementById('tv_video').src = "../../media/videos/" + video + ".mp4";
+        console.log("playing", video);
     }
 </script>
 {% else %}

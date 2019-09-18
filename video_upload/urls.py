@@ -7,8 +7,7 @@ from . import views
 #load methods from views.py
 urlpatterns = [
     path('', views.index, name='index'), #load a method called index from views.py
-    path('video1/', views.video1, name='video1'), #load a method called index from views.py
-    path('video2/', views.video2, name='video2'), #load a method called index from views.py
-    path('video3/', views.video3, name='video3'), #load a method called index from views.py
-    path('video4/', views.video4, name='video4'), #load a method called index from views.py
+    path('add_tv/', views.add_tv, name='add_tv'), #load a method called add_tv from views.py
+    path('delete_tv/', views.delete_tv, name='delete_tv')
+    # path('upload/',views.upload,name='upload'),
 ]

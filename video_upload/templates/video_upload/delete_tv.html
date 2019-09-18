@@ -1,0 +1,66 @@
+{% extends 'video_upload/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated%}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 sidebar" id="sidebar">
+            <div class='tint'> </div>
+            <h5>Welcome back, <br> Joe</h5>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'index' %}">Home</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'add_tv' %}">Add a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'delete_tv'%}">Delete a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'logout' %}">Logout</a>
+                
+        </div>
+        <div class="col-10">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <div class="section-header">
+                            <h3>Delete a TV</h3>
+                        </div>
+                        <div class="section-body">
+                        {% for Television in TVs%}
+                        {% comment %} <form id="delete" action="{% url'delete_tv% }" method="GET">
+                        {% csrf_token %}
+                            <select>
+                                <option value>{{TV.tv_name}}
+                            </select>
+                            <input type="submit" value="delete" name="tv">
+                        </form> {% endcomment %}
+                        <h3>{{ Television.tv_name }}</h3>
+    
+                        <form id="delete" action="" method="POST">
+                        {% csrf_token %}
+                        <a class="btn btn-danger" onclick="$('#delete').submit();"> 
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        <a class="btn btn-danger" onclick="#">
+                            <i class="far fa-trash"></i>
+                        </a>
+                        <input type="hidden" value="{{ Television.tv_id }}" name="Televison_id"> 
+                        </form>
+                        {%endfor%}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    
+    </div>
+</div>
+
+{% else %}
+<script>
+    window.location.href = "../accounts/login/"
+</script>
+{% endif %}
+{% endblock %}
