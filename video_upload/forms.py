@@ -15,6 +15,7 @@ class TelevisionForm(forms.ModelForm):
         model = Television
         fields = ('tv_name', 'tv_ip')
 
+#form for delete TV 
 class DeleteTvForm(forms.ModelForm):
     class Meta:
         model = DeleteTv

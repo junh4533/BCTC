@@ -10,6 +10,7 @@ class Television(models.Model):
     def __str__(self):
         return self.tv_name
 
+#Pass the key from Television Table to create a drop down in template
 class DeleteTv(models.Model):
     TV = models.ForeignKey(Television, on_delete=models.CASCADE)
 

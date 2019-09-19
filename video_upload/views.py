@@ -97,13 +97,17 @@ def delete_tv(request):
         form = DeleteTvForm
         return render(request, 'video_upload/delete_tv.html',{"form":form})
     elif request.method =='POST':
-        tv1 = request.POST.get('TV')
-        Television.objects.get(tv_id=tv1).delete()
-        tv1 = 'deleted'
-        messages.info(request,'TV successfully deleted')
-        return redirect(delete_tv)
-    # else:
-    #     form = DocumentForm()
+        #action check for delete/edit 
+        if '_delete_tv' in request.POST:
+            tv1 = request.POST.get('TV')
+            Television.objects.get(tv_id=tv1).delete()
+            messages.info(request,'TV successfully deleted')
+            return  redirect(delete_tv)
+        #edit section to be worked on 
+        elif '_edit_tv' in request.POST:
+            tv2 = request.POST.get('TV')
+            tv_edit = Television.objects.get(tv_id=tv2)
+            return  redirect(index)
 
 
 
