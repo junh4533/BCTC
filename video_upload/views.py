@@ -12,38 +12,29 @@ import subprocess
 
 def index(request):
 
-    # hostname = "10.30.125.20" #long shing
-    # hostname2 = "10.30.125.125" #york
-    # hostname3 = "10.30.125.130" #ashley
-    # hostname4 = " 10.30.126.6" #me
+    responses = []
+    #ping
+    for tv in Television.objects.all():
+        response = os.system("ping " + str(tv.tv_ip) +  " -n 1 -w 1") 
+        responses.append([tv.tv_name,response])
 
-    if request.method == 'GET':
-        responses = []
-        #ping
-        for tv in Television.objects.all():
-            response = os.system("ping " + str(tv.tv_ip) +  " -n 1 -w 1") 
-            responses.append([tv.tv_name,response])
+    print(responses)
 
-        form = DocumentForm()
-        args = {
-            "form": form,
-            "responses": responses,
-        }
-        return render(request, 'video_upload/index.html', args)
+    form = DocumentForm()
+    args = {
+        "form": form,
+        "responses": responses,
+    }
 
-    elif request.method == 'POST':
+    if request.method == 'POST':
         tv_id = request.POST.get('tv')
-        print(tv_id)
-        hostname = Television.objects.get(tv_id = tv_id).tv_ip
-        print(hostname)
-        response = os.system("ping " + hostname +  " -n 1 -w 1") # ping once at hostname
-        print(response)
-
+        # hostname = Television.objects.get(tv_id = tv_id).tv_ip
+        # response = os.system("ping " + hostname +  " -n 1 -w 1") # ping once at hostname
         form = DocumentForm(request.POST, request.FILES)    
+        print(responses[tv_id])
         #check ping response
-        if response == 0:
+        if responses[tv_id[0]] == 0:
             print(hostname, 'is up!')
-            
             if form.is_valid(): 
                 TVName = Television.objects.get(tv_id = tv_id).tv_name
                 print(TVName)
@@ -54,27 +45,15 @@ def index(request):
                 dst = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/RemoteVideos/" + TVName + r".mp4"
                 shutil.copy(src, dst, follow_symlinks=True)
                 print('moved')
-                #src = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/TV1.mp4"
-                #dst = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/test/"
                 upload_status = "success"
             else:
                 test = Television.objects.get(id= request.POST.get('tv'))
                 upload_status = "failed"
-            # return render(request, 'video_upload/index.html',{"upload_status":upload_status,"form":form})
         else:
             print(hostname, 'is down!')
             upload_status = "offline"
-        responses = []
-        #ping
-        for tv in Television.objects.all():
-            response = os.system("ping " + str(tv.tv_ip) +  " -n 1 -w 1") 
-            responses.append([tv.tv_name,response])
-        args = {
-            "form": form,
-            "upload_status":upload_status,
-            "responses": responses,
-        }     
-        return render(request, 'video_upload/index.html',args)
+    
+    return render(request, 'video_upload/index.html',args)
 
 def add_tv(request):
     if request.method == 'GET':

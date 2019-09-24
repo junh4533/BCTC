@@ -8,11 +8,10 @@
         <div class="col-2 sidebar" id="sidebar">
             <div class='tint'> </div>
             <h5>Welcome back, <br> Joe</h5>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'index' %}">Home</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'add_tv' %}">Add a TV</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'delete_tv'%}">Delete a TV</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'logout' %}">Logout</a>
-                
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'index' %}"> <i class="fa fa-home"></i> &nbsp; Home</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'add_tv' %}"><i class="fa fa-television"></i> &nbsp; Add a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'delete_tv'%}"><i class="fa fa-trash"></i>&nbsp;  Delete a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> &nbsp; Logout</a>  
         </div>
         <div class="col-10">
             <div class="container-fluid">

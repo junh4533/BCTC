@@ -1,8 +1,11 @@
 body{
   background-image:linear-gradient(to bottom left,#216e93,#21648a,#1f5881,#172d5b,#191c51);
   color:white;
-  height:100vh;
-  width:100vw;
+  /* height:100vh;
+  width:100vw; */
+  height:100%;
+  width:100%;
+  overflow: hidden;
 }
 
 
@@ -10,8 +13,8 @@ div [class*='col-']{
   padding: 15px 15px 15px 15px;
 }
 
-h3{
-  margin-bottom: 0;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0 0;
 }
 
 .tint {
@@ -40,29 +43,21 @@ h3{
 }
 
 .sidebar .button{
-  /* display:block; */
-  /* width:100%; */
   height: 5%;
-  
 }
 
 .sidebar a{
   text-decoration: none;
 }
 
-
-
 .section-header{
   background-color: rgb(1, 57, 105);
   width:100%;
-  /* height:7%; */
-  /* padding: 15px 15px 15px 15px; */
+  padding: 10px 10px 10px 10px;
 }
 .section-body{
   background-color: rgba(255, 255, 255, 0.1);
   width:100%;
-  /* height:100%; */
-  padding: 15px 15px 15px 15px;
 }
 
 .offline{
@@ -82,12 +77,8 @@ span:hover{
 }
 
 #tv_video{
-  /* width:50vw; */
-  /* height:35vh; */
-  /* height:100%; */
-  padding: 0 0 0 0;
+  padding: 10px 10px 10px 10px;
   width:100%;
-  /* height:inherit; */
 }
 
 #status {
@@ -96,6 +87,16 @@ span:hover{
   /* height:94%; */
   /* display:inline; */
 }
+
+/* .clearablefileinput{
+  display: none;
+  background: #01FF70;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+} */
+
 
 /*-------------- form-------------- */
 input{
