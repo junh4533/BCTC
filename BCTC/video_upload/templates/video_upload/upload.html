@@ -1,0 +1,43 @@
+{% extends 'video_upload/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated%}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 sidebar">
+            <div class='tint'> </div>
+            <div id="nav-header">
+                <h5>Welcome back, <br> Joe</h5>
+                <a href="{% url 'logout' %}">logout</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <div class="section-header">
+                            <h3>Upload</h3>
+                        </div>
+                        <div class="section-body">
+                            <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                                {{ form|crispy }}
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<script>
+    window.location.href = "../accounts/login/"
+</script>
+{% endif %}
+{% endblock %}

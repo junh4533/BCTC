@@ -1,0 +1,59 @@
+{% extends 'video_upload/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated%}
+
+
+{% if messages %}
+<div class="alert alert-success alert-dismissible">
+    {% for message in messages %}
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5> <b>Success!</b> TV successfully deleted </h5>
+</div>{% endfor %}
+{% elif upload_status == "fail" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV was not successfully added.</h5>
+</div>
+{% elif upload_status == "offline" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV is offline.</h5>
+</div>
+<div>
+    {% endif %}
+</div>
+
+
+<div class="bg"> </div>
+<div class="col-10">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>Delete a TV</h3>
+                </div>
+                <div class="section-body">
+                    <form id="delete" action="" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn editbtn" value="edit_tv" name="_edit_tv">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="submit" class="btn deletebtn" value="delete_tv" name="_delete_tv">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% else %}
+<script>
+    window.location.href = "../accounts/login/"
+</script>
+{% endif %}
+{% endblock %}

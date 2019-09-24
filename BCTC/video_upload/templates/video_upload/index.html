@@ -1,0 +1,153 @@
+{% extends 'video_upload/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated%}
+
+{% if upload_status == "success" %}
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5> <b>Success!</b> Video was added. </h5>
+</div>
+{% elif upload_status == "fail" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> Video was not successfully added.</h5>
+</div>
+{% elif upload_status == "offline" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV is offline.</h5>
+</div>
+{% endif %}
+</div>
+<div class="bg"> </div>
+<div class="col-10">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>Upload</h3>
+                </div>
+                <div class="section-body-upload">
+                    {% block main %}
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col">
+                                {{ form.description|as_crispy_field }}
+                            </div>
+                            <div class="form-group col">
+                                {{ form.document|as_crispy_field }}
+                                {% comment %} <div class="buttonlink"><i class="fas fa-file-check"></i>
+                                    {{ form.document|as_crispy_field }}UPLOAD FILE
+                                </div> {% endcomment %}
+                            </div>
+                            <div class="form-group col">
+                                {{ form.tv|as_crispy_field }}
+                                <!--            FOR DROPDOWN SEARCH BAR
+                                        <div class="dropdown">
+                                            <button onclick="myFunction()" class="dropbtn">SELECT TV</button>
+                                            <div id="myDropdown" class="dropdown-content">
+                                                <input type="text" placeholder="Search.." id="myInput"
+                                                    onkeyup="filterFunction()">
+                                                {% for Television in TVS %}
+                                                <option value="{{ Television.tv_id }}">{{Television.tv_name}}</option>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+-->
+                                {% comment %} </div> {% endcomment %}
+                                 {% comment %} <div class="form-group col"> {% endcomment %}
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i>Upload</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row row-eq-height">
+
+            <div class="col-3">
+
+                <div class="section-header">
+                    <h3>Status</h3>
+                </div>
+                <div id="status" class="section-body">
+                    {% for response in responses %}
+                    {{response.0}} {# tv name #}
+                    {% if response.1 == 0 %} {# tv ip #}
+                    <i class="fa fa-power-off online"></i>
+                    {% else %}
+                    <i class="fa fa-power-off offline"></i>
+                    {% endif %}
+                    {% with tv_name=response.0 %}
+                    <span onclick="preview_video('{{ tv_name }}')" class="fa fa-play-circle"></span> <br>
+                    {% endwith %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="col-9">
+                <div class="section-header">
+                    <h3>Preview</h3>
+                </div>
+                <div class="section-body">
+                    <video id="tv_video" controls autoplay loop>
+                        <source id="player" src="" type="video/mp4" />
+                        video not supported by this browser.
+                    </video>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+<script>
+    function preview_video(video) {
+        document.getElementById('tv_video').src = "../../media/videos/" + video + ".mp4";
+        console.log("playing", video);
+    }
+</script>
+
+
+<!-- for dropdown search
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+</script>
+ -->
+
+{% else %}
+<script>
+    window.location.href = "../accounts/login/"
+</script>
+{% endif %}
+{% endblock %}
