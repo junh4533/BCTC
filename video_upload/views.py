@@ -28,12 +28,13 @@ def index(request):
 
     if request.method == 'POST':
         tv_id = request.POST.get('tv')
-        # hostname = Television.objects.get(tv_id = tv_id).tv_ip
-        # response = os.system("ping " + hostname +  " -n 1 -w 1") # ping once at hostname
+        hostname = Television.objects.get(tv_id = tv_id).tv_ip
+        response = os.system("ping " + hostname +  " -n 1 -w 1") # ping once at hostname
         form = DocumentForm(request.POST, request.FILES)    
-        print(responses[tv_id])
+        # print(responses[tv_id])
         #check ping response
-        if responses[tv_id[0]] == 0:
+        # if responses[tv_id[0]] == 0:
+        if response== 0:
             print(hostname, 'is up!')
             if form.is_valid(): 
                 TVName = Television.objects.get(tv_id = tv_id).tv_name
@@ -41,8 +42,8 @@ def index(request):
                 print('valid form')
                 form.save()
                 print("saved")
-                src = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/" + TVName + r".mp4"
-                dst = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/RemoteVideos/" + TVName + r".mp4"
+                src = r"../BCTC/media/videos/" + TVName + r".mp4"
+                dst = r"../BCTC/media/RemoteVideos/" + TVName + r".mp4"
                 shutil.copy(src, dst, follow_symlinks=True)
                 print('moved')
                 upload_status = "success"
