@@ -10,7 +10,7 @@
             <h5>Welcome back, <br> Joe</h5>
             <a class="w3-button w3-hover-white w3-block"  href="{% url 'index' %}"> <i class="fa fa-home"></i> &nbsp; Home</a>
             <a class="w3-button w3-hover-white w3-block"  href="{% url 'add_tv' %}"><i class="fa fa-television"></i> &nbsp; Add a TV</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'delete_tv'%}"><i class="fa fa-trash"></i>&nbsp;  Delete a TV</a>
+            <a class="w3-button w3-hover-white w3-block"  href="{% url 'config_tv'%}"><i class="fa fa-trash"></i>&nbsp;  Configure a TV</a>
             <a class="w3-button w3-hover-white w3-block"  href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> &nbsp; Logout</a>  
         </div>
         <div class="col-10">
@@ -42,13 +42,13 @@
                         </div>
                         <div id="status" class="section-body">
                         {% for response in responses %}
-                            {{response.0}} {# tv name #}
-                            {% if response.1 == 0 %} {# tv ip #}
+                            {{response.1}} {# tv name #}
+                            {% if response.2 == 0 %} {# tv status #}
                                  <i class="fa fa-power-off online"></i>
                             {% else %}
                                 <i class="fa fa-power-off offline"></i>
                             {% endif %} 
-                            {% with tv_name=response.0 %}
+                            {% with tv_name=response.1 %}
                             <span onclick="preview_video('{{ tv_name }}')" class="fa fa-play-circle"></span> <br>
                             {% endwith %}
                         {% endfor %}
@@ -66,21 +66,20 @@
                                 video not supported by this browser.
                             </video>
                         </div>
+                    {% if upload_status == "success" %}
+                    <div class="alert alert-success">
+                        <strong>Success!</strong>Video was added.
                     </div>
-
-                     {% if upload_status == "success" %}
-            <div class="alert alert-success">
-                <strong>Success!</strong>Video was added.
-            </div>
-            {% elif upload_status == "fail" %}
-            <div class="alert alert-danger">
-                <strong>Error!</strong>Video was not successfully added.
-            </div>
-            {% elif upload_status == "offline" %}
-            <div class="alert alert-danger">
-                <strong>Error!</strong>TV is offline.
-            </div>
-            {% endif %}
+                    {% elif upload_status == "fail" %}
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong>Video was not successfully added.
+                    </div>
+                    {% elif upload_status == "offline" %}
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong>TV is offline.
+                    </div>
+                    {% endif %}
+                    </div>
 
                 </div>
 

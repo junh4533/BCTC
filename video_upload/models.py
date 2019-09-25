@@ -11,7 +11,7 @@ class Television(models.Model):
         return self.tv_name
 
 #Pass the key from Television Table to create a drop down in template
-class DeleteTv(models.Model):
+class Config(models.Model):
     TV = models.ForeignKey(Television, on_delete=models.CASCADE)
 
 class Document(models.Model):
@@ -30,7 +30,6 @@ class Document(models.Model):
             print('File deleted')
 
     video_id = models.AutoField(primary_key=True)
-    description = models.CharField(max_length=255, blank=False)
     document = models.FileField(upload_to=file_path)
     upload_date = models.DateTimeField(auto_now_add=True)
     tv = models.ForeignKey(Television, on_delete=models.CASCADE)
