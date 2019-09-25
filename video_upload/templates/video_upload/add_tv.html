@@ -3,6 +3,7 @@
 {% block content %}
 {% if user.is_authenticated%}
 
+<<<<<<< HEAD
 <div class="container-fluid">
     <div class="row">
         <div class="col-2 sidebar" id="sidebar">
@@ -20,35 +21,49 @@
                 <div class="row">
 
                     <div class="col-12">
+=======
+>>>>>>> 3619d40d0679899d9a6b3fe6e95b8298bd95df69
 
-                        <div class="section-header">
-                            <h3>Add a TV</h3>
-                        </div>
-                        <div class="section-body">
-                            <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
-                                {{ form|crispy }}
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </form>
-                        </div>
+{% if upload_status == "success" %}
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5> <b>Success!</b> TV was added. </h5>
+</div>
+{% elif upload_status == "fail" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV was not successfully added.</h5>
+</div>
+{% elif upload_status == "offline" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV is offline.</h5>
+</div>
+<div>
+    {% endif %}
+</div>
 
-                    </div>
 
+<div class="bg"> </div>
+<div class="col-10">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>Add a TV</h3>
+                </div>
+                <div class="section-body">
+                    <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
                 </div>
             </div>
-            
-            {% if upload_status == "success" %}
-            <div class="alert alert-success">
-                <strong>Success!</strong> TV was added.
-            </div>
-            {% elif upload_status == "fail" %}
-            <div class="alert alert-danger">
-                <strong>Error!</strong> TV was not successfully added.
-            </div>
-            {% endif %}
-
         </div>
-    
     </div>
+</div>
+
+</div>
 </div>
 
 {% else %}

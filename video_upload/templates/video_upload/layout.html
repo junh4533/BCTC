@@ -4,25 +4,63 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
+    {% comment %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% endcomment %}
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
     <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 </head>
-<body>
-   
-    {% block content%}
-    {% endblock %}
 
-     <!-- jQuery library -->
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 sidebar" id="sidebar">
+                <div class='tint'> </div>
+                <h5>Welcome back, <br> Joe</h5>
+
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'index' %}"><i class="fas fa-home"></i>
+                    Home</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'add_tv' %}"><i class="fas fa-tv"></i> Add a
+                    TV</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'config_tv'%}"><i class="fas fa-trash"></i>
+                    Delete a TV</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'logout' %}"><i
+                        class="fas fa-sign-out-alt"></i> Logout</a>
+
+
+                {% if upload_status == "success" %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5> <b>Success!</b> Video was added. </h5>
+                </div>
+                {% elif upload_status == "fail" %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><b>Error!</b> Video was not successfully added.</h5>
+                </div>
+                {% elif upload_status == "offline" %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><b>Error!</b> TV is offline.</h5>
+                </div>
+                {% endif %}
+            </div>
+
+            {% block content%}
+            {% endblock %}
+
+        </div>
+    </div>
+
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
@@ -30,6 +68,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
     <script src="{% static 'js/main.js' %}"></script>
+    <!--ICONS-->
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 </body>
+
 </html>

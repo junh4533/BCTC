@@ -41,8 +41,8 @@ def index(request):
                         print('valid form')
                         form.save()
                         print("saved")
-                        src = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/videos/" + TVName + r".mp4"
-                        dst = r"C:/Users/Administrator/Desktop/Django Projects/BCTC/media/RemoteVideos/" + TVName + r".mp4"
+                        src = r"../BCTC/media/videos/" + TVName + r".mp4"
+                        dst = r"../BCTC/media/RemoteVideos/" + TVName + r".mp4"
                         shutil.copy(src, dst, follow_symlinks=True)
                         print('moved')
                         upload_status = "success"

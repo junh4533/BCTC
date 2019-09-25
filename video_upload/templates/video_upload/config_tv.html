@@ -3,6 +3,7 @@
 {% block content %}
 {% if user.is_authenticated%}
 
+<<<<<<< HEAD:video_upload/templates/video_upload/config_tv.html
 <div class="container-fluid">
     <div class="row">
         <div class="col-2 sidebar" id="sidebar">
@@ -25,36 +26,55 @@
                         </div>
                         <div class="section-body">
                         <form id="delete" action="" method="POST">
+=======
+
+{% if messages %}
+<div class="alert alert-success alert-dismissible">
+    {% for message in messages %}
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5> <b>Success!</b> TV successfully deleted </h5>
+</div>{% endfor %}
+{% elif upload_status == "fail" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV was not successfully added.</h5>
+</div>
+{% elif upload_status == "offline" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> TV is offline.</h5>
+</div>
+<div>
+    {% endif %}
+</div>
+
+
+<div class="bg"> </div>
+<div class="col-10">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>Delete a TV</h3>
+                </div>
+                <div class="section-body">
+                    <form id="delete" action="" method="POST">
+>>>>>>> 3619d40d0679899d9a6b3fe6e95b8298bd95df69:video_upload/templates/video_upload/delete_tv.html
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button type="submit" class="btn btn-primary" value="edit_tv" name="_edit_tv">
-                        <i class="fa fa-edit"></i>
+                        <button type="submit" class="btn editbtn" value="edit_tv" name="_edit_tv">
+                            <i class="fas fa-edit"></i>
                         </button>
-                        <button type="submit" class="btn btn-danger" value="delete_tv" name="_delete_tv">
-                        <i class="fa fa-trash"></i>
+                        <button type="submit" class="btn deletebtn" value="delete_tv" name="_delete_tv">
+                            <i class="fas fa-trash"></i>
                         </button>
-                        </form>
-                        {% if messages %}
-                        <ul class="messages">
-                            {% for message in messages %}
-                            <div class="alert alert-success">
-                             {{ message }}
-                            </div>
-                            {% endfor %}
-                        </ul>
-                        {% endif %} 
-                        </div>
-
-                    </div>
-
+                    </form>
                 </div>
             </div>
-
-
         </div>
-    
     </div>
 </div>
+
 
 {% else %}
 <script>
