@@ -3,53 +3,31 @@
 {% block content %}
 {% if user.is_authenticated%}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-2 sidebar" id="sidebar">
-            <div class='tint'> </div>
-            <h5>Welcome back, <br> Joe</h5>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'index' %}"> <i class="fa fa-home"></i> &nbsp; Home</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'add_tv' %}"><i class="fa fa-television"></i> &nbsp; Add a TV</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'config_tv'%}"><i class="fa fa-cogs"></i>&nbsp;  Configure a TV</a>
-            <a class="w3-button w3-hover-white w3-block"  href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> &nbsp; Logout</a> 
-                
-        </div>
-        <div class="col-10">
-            <div class="container-fluid">
-                <div class="row">
+<div class="col-12">
 
-                    <div class="col-12">
-    
-                        <div class="section-header">
-                            <h3>Edit IP for {{edit.tv_name}}</h3>
-                        </div>
-                        <div class="section-body">
-                        <form id="edit" action="" method="POST">
-                        {% csrf_token %}
-                        {{ form.tv_ip|as_crispy_field }}
-                        <button type="submit" class="btn btn-primary">Confirm</button>
-                        </button>
-                        </form>
-                        {% if messages %}
-                            <ul class="messages">
-                            {% for message in messages %}
-                                <div class="alert alert-success">
-                                    {{ message }}
-                                 </div>
-                            {% endfor %}
-                            </ul>
-                        {% endif %} 
-                        </div>
-                    </div>
-
-                </div>
+    <div class="section-header">
+        <h3>Edit IP for {{edit.tv_name}}</h3>
+    </div>
+    <div class="section-body">
+        <form id="edit" action="" method="POST">
+            {% csrf_token %}
+            {{ form.tv_ip|as_crispy_field }}
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            </button>
+        </form>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
             </div>
-
-
-        </div>
-    
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
 </div>
+
+
 
 {% else %}
 <script>

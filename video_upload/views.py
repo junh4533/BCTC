@@ -68,6 +68,7 @@ def add_tv(request):
             print(form.non_field_errors)
             print("form error")
             upload_status = "fail"
+
         return render(request, 'video_upload/add_tv.html',{'upload_status':upload_status, "form": form})
 
 def config_tv(request):
@@ -80,12 +81,13 @@ def config_tv(request):
             tv1 = request.POST.get('TV')
             Television.objects.get(tv_id=tv1).delete()
             messages.info(request,'TV successfully deleted')
-            return  redirect(config_tv)
-        
+            return redirect(config_tv)
+
         elif '_edit_tv' in request.POST:
             #store tv choice in session 
             request.session['tv2'] = request.POST['TV']
-            return  redirect(edit_tv)
+            return redirect(edit_tv)
+    
 
 def edit_tv(request):
     if request.method == 'GET':
