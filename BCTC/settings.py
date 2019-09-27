@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -38,14 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'video_upload',
     'widget_tweaks',
+    'video_upload',
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 MEDIA_URL = "/media/"
-# MEDIA_ROOT = os.path.join(BASE_DIR,'\\\\10.20.124.21\\reports\\MassPortalVids\\TV1\\')
-# MEDIA_URL = "\\\\10.20.124.21\\reports\\MassPortalVids\\TV1\\"
   
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

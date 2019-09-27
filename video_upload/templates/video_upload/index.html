@@ -7,7 +7,7 @@
     <div class="section-header">
         <h3>Upload</h3>
     </div>
-    <div class="section-body-upload">
+    <div class="section-body">
         {% block main %}
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
@@ -37,7 +37,7 @@
         </div>
         <div id="status" class="section-body">
             {% for response in responses %}
-            {{response.1}} {# tv name #}
+            <p>{{response.1}}</p> {# tv name #}
             {% if response.2 == 0 %} {# tv status #}
             <i class="fa fa-power-off online"></i>
             {% else %}
@@ -63,13 +63,10 @@
         </div>
     </div>
 
-
-
-
     <script>
         function preview_video(video) {
             document.getElementById('tv_video').src = "../../media/videos/" + video + ".mp4";
-            console.log("playing", video);
+            console.log("playing", document.getElementById('tv_video').src);
         }
     </script>
 
