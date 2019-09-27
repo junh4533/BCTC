@@ -3,6 +3,19 @@
 {% block content %}
 {% if user.is_authenticated%}
 
+{% if upload_status == "success" %}
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5> <b>Success!</b> Video was added. </h5>
+</div>
+{% elif upload_status == "fail" %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><b>Error!</b> Video was not successfully added.</h5>
+</div>
+{% endif %}
+
+
 <div class="col-12">
     <div class="section-header">
         <h3>Upload</h3>
@@ -35,19 +48,30 @@
         <div class="section-header">
             <h3>Status</h3>
         </div>
-        <div id="status" class="section-body">
-            {% for response in responses %}
-            {{response.1}} {# tv name #}
-            {% if response.2 == 0 %} {# tv status #}
-            <i class="fa fa-power-off online"></i>
-            {% else %}
-            <i class="fa fa-power-off offline"></i>
-            {% endif %}
-            {% with tv_name=response.1 %}
-            <span onclick="preview_video('{{ tv_name }}')" class="fa fa-play-circle"></span> <br>
-            {% endwith %}
-            {% endfor %}
+        <div class="section-body">
+            <table id="status" class="table table-borderless">
+                <tbody>
+                    {% for response in responses %}
+                    <tr>
+                        <td>
+                            {{response.1}} {# tv name #}
+                        </td>
+                        <td>
+                            {% if response.2 == 0 %} {# tv status #}
+                            <i class="fa fa-power-off online"></i>
+                            {% else %}
+                            <i class="fa fa-power-off offline"></i>
+                            {% endif %}
+                            {% with tv_name=response.1 %}
+                            <span onclick="preview_video('{{ tv_name }}')" class="fa fa-play-circle"></span> <br>
+                            {% endwith %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
 
     </div>
 
