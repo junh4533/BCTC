@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from django.utils import timezone
+from django.utils.timezone import now 
 import subprocess
 import shutil, os
 
@@ -23,6 +25,7 @@ class Document(models.Model):
             print('File deleted')
             print(self.tv)
         return 'videos/' + str(self.tv) + ".mp4"
+        return str(self.tv) + " (Date Uploaded: " + str(datetime.now()) + ")"
 
     def delete_file(path):
         if os.path.isfile(path):
@@ -31,12 +34,13 @@ class Document(models.Model):
 
     video_id = models.AutoField(primary_key=True)
     document = models.FileField(upload_to=file_path)
-    upload_date = models.DateTimeField(auto_now_add=True)
-    tv = models.ForeignKey(Television, on_delete=models.CASCADE)
-
-    # gives the objects its file name
+    tv = models.ForeignKey(Television, on_delete=models.CASCADE, related_name='tv_table')
+    upload_date = models.DateTimeField(default=datetime.now, blank=False, editable=False)
+    
     def __str__(self):
-        return str(self.tv) + " (Date Uploaded: " + str(datetime.now()) + ")"
+        return str(self.tv) + " (Date Uploaded: " + str(self.upload_date) + ")"
+    # gives the objects its file name
+    
 
     
 

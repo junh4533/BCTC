@@ -9,14 +9,25 @@ from django.contrib.auth.decorators import login_required
 import time
 import shutil
 import subprocess
+from celery import task
+
+
 
 def index(request):
-
+    username = request.user.username
     responses = []
     #ping
     for tv in Television.objects.all():
         response = os.system("ping " + str(tv.tv_ip) +  " -n 1 -w 1") 
-        responses.append([tv.tv_id, tv.tv_name, response])
+        name = tv.tv_name
+        try:
+            #query for latest entry of document sort by tv name 
+            date = Document.objects.filter(tv__tv_name=name).latest('upload_date').upload_date
+            print(date)
+            responses.append([tv.tv_id, tv.tv_name, response, date])
+        except Document.DoesNotExist: #error handling for tv not with no document uploaded 
+            date = str('TV has no video attached')
+            responses.append([tv.tv_id, tv.tv_name, response, date])
 
     print(responses)
 
@@ -31,6 +42,10 @@ def index(request):
             tv_id = response[0]
             tv_name = response[1]
             tv_status = response[2]
+            try:
+                date = respose[3]
+            except:
+                pass
             if str(tv_id) == str(request.POST.get('tv')):
                 form = DocumentForm(request.POST, request.FILES)           
                 if tv_status == 0: #check ping response
@@ -45,13 +60,13 @@ def index(request):
                         dst = r"../BCTC/media/RemoteVideos/" + TVName + r".mp4"
                         shutil.copy(src, dst, follow_symlinks=True)
                         print('moved')
-                        upload_status = "success"
+                        messages.success(request,'Video was uploaded')
+                        return redirect(index)
                     else:
                         test = Television.objects.get(id= request.POST.get('tv'))
-                        upload_status = "failed"
                 else:
                     print(tv_name, 'is down!')
-                    upload_status = "offline"
+                    messages.error(request, 'TV is offline')
     return render(request, 'video_upload/index.html',args)
 
 def add_tv(request):
@@ -63,13 +78,13 @@ def add_tv(request):
         if form.is_valid(): 
             form.save()
             print("form saved")
-            upload_status = "success"
+            messages.success(request,'Success')
         else:
             print(form.non_field_errors)
             print("form error")
-            upload_status = "fail"
+            messages.error(request,'Error')
 
-        return render(request, 'video_upload/add_tv.html',{'upload_status':upload_status, "form": form})
+        return render(request, 'video_upload/add_tv.html',{"form": form})
 
 def config_tv(request):
     if request.method =='GET':
@@ -79,8 +94,13 @@ def config_tv(request):
         #check for delete/edit 
         if '_delete_tv' in request.POST:
             tv1 = request.POST.get('TV')
+            TVNAME = Television.objects.get(tv_id=tv1).tv_name
             Television.objects.get(tv_id=tv1).delete()
-            messages.info(request,'TV successfully deleted')
+            messages.error(request,'TV was deleted')
+            src = r"../BCTC/media/videos/" + TVNAME + r".mp4"
+            dst = r"../BCTC/media/RemoteVideos/" + TVNAME + r".mp4"
+            os.remove(src)
+            os.remove(dst)
             return redirect(config_tv)
 
         elif '_edit_tv' in request.POST:
@@ -106,13 +126,13 @@ def edit_tv(request):
 
         if form.is_valid:
             form.save()
-            messages.info(request,'IP updated')
-        args = {
-            'edit':edit,
-            'form':form
-            }
+            messages.info(request,'IP was updated')
+            args = {
+                'edit':edit,
+                'form':form
+                }
         return redirect(edit_tv)
-
+ 
 
 
 

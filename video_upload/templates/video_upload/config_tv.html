@@ -16,10 +16,10 @@
                     <form id="delete" action="" method="POST">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button type="submit" class="btn btn-danger" value="edit_tv" name="_edit_tv">
+                        <button type="submit" class="btn btn-primary" value="edit_tv" name="_edit_tv">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button type="submit" class="btn btn-primary" value="delete_tv" name="_delete_tv">
+                        <button type="submit" class="btn btn-danger" value="delete_tv" name="_delete_tv">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>

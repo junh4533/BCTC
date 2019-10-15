@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserChangeForm
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ('document', 'tv')
+        fields = ('document', 'tv',)
 
 class TelevisionForm(forms.ModelForm):
     class Meta:

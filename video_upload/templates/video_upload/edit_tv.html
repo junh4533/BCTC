@@ -15,7 +15,7 @@
             <button type="submit" class="btn btn-primary">Confirm</button>
             </button>
         </form>
-        {% if messages %}
+        {% comment %} {% if messages %}
         <ul class="messages">
             {% for message in messages %}
             <div class="alert alert-success">
@@ -23,7 +23,7 @@
             </div>
             {% endfor %}
         </ul>
-        {% endif %}
+        {% endif %} {% endcomment %}
     </div>
 </div>
 

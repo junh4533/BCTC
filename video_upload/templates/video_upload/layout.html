@@ -10,9 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
-    {% comment %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% endcomment %}
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -24,32 +21,37 @@
         <div class="row">
             <div class="col-2 sidebar" id="sidebar">
                 <div class='tint'> </div>
-                <h5>Welcome back, <br> Joe</h5>
+                {% if user.is_authenticated %}
+                <h5>Welcome, <br> {{user.get_username}}</h5>
+                {% endif %}
 
-                <a class="w3-button w3-hover-white w3-block" href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
-                <a class="w3-button w3-hover-white w3-block" href="{% url 'add_tv' %}"><i class="fas fa-tv"></i> Add TV</a>
-                <a class="w3-button w3-hover-white w3-block" href="{% url 'config_tv'%}"><i class="fas fa-cogs"></i> Configure TV</a>
-                <a class="w3-button w3-hover-white w3-block" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'index' %}"><i class="fas fa-home"></i>
+                    Home</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'add_tv' %}"><i class="fas fa-tv"></i> Add
+                    TV</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'config_tv'%}"><i class="fas fa-cogs"></i>
+                    Configure TV</a>
+                <a class="w3-button w3-hover-white w3-block" href="{% url 'logout' %}"><i
+                        class="fas fa-sign-out-alt"></i> Logout</a>
 
-                {% if upload_status == "success" %}
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5> <b>Success!</b>{{message}}</h5>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
                 </div>
-                {% elif upload_status == "fail" %}
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5><b>Error!</b>{{message}}</h5>
-                </div>
+                {% endfor %}
                 {% endif %}
             </div>
             <div class="col-10">
-            <div class="container-fluid">
-                <div class="row">
-            {% block content%}
-            {% endblock %}
-            </div>
-            </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        {% block content%}
+                        {% endblock %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

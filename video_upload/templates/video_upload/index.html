@@ -3,7 +3,7 @@
 {% block content %}
 {% if user.is_authenticated%}
 
-{% if upload_status == "success" %}
+{% comment %} {% if upload_status == "success" %}
 <div class="alert alert-success alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h5> <b>Success!</b> Video was added. </h5>
@@ -13,7 +13,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h5><b>Error!</b> Video was not successfully added.</h5>
 </div>
-{% endif %}
+{% endif %} {% endcomment %}
 
 
 <div class="col-12">
@@ -26,6 +26,7 @@
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col">
+                    {% comment %} {{form.upload_date|as_crispy_field}} {% endcomment %}
                     {{ form.document|as_crispy_field }}
                 </div>
                 <div class="form-group col">
@@ -52,21 +53,25 @@
             <table id="status" class="table table-borderless">
                 <tbody>
                     {% for response in responses %}
-                    <tr>
-                        <td>
+                    <tr style="padding:0">
+                        {% comment %} <td>
                             {{response.1}} {# tv name #}
-                        </td>
-                        <td>
+                        </td> {% endcomment %}
+                        <td style="padding:0">
+                            {{response.1}}
                             {% if response.2 == 0 %} {# tv status #}
                             <i class="fa fa-power-off online"></i>
                             {% else %}
                             <i class="fa fa-power-off offline"></i>
                             {% endif %}
                             {% with tv_name=response.1 %}
-                            <span onclick="preview_video('{{ tv_name }}')" class="fa fa-play-circle"></span> <br>
+                            <span onclick="preview_video('{{ tv_name }}');" class="fa fa-play-circle"></span> <br>
                             {% endwith %}
-                        </td>
+                        </td style="padding:0">
                     </tr>
+                    <td style="padding:0">
+                            <strong style="font-size: 10px;">Uploaded: {{response.3}}</strong>
+                    </td>
                     {% endfor %}
                 </tbody>
             </table>
@@ -91,6 +96,8 @@
         function preview_video(video) {
             document.getElementById('tv_video').src = "../../media/videos/" + video + ".mp4";
             console.log("playing", document.getElementById('tv_video').src);
+            console.log((video))
+
         }
     </script>
 
