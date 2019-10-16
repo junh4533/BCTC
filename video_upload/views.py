@@ -57,7 +57,7 @@ def index(request):
                         form.save()
                         print("saved")
                         src = r"../BCTC/media/videos/" + TVName + r".mp4"
-                        dst = r"../BCTC/media/RemoteVideos/" + TVName + r".mp4"
+                        dst = r"C:/RemoteVids/" + TVName + r".mp4"
                         shutil.copy(src, dst, follow_symlinks=True)
                         print('moved')
                         messages.success(request,'Video was uploaded')
@@ -98,7 +98,7 @@ def config_tv(request):
             Television.objects.get(tv_id=tv1).delete()
             messages.error(request,'TV was deleted')
             src = r"../BCTC/media/videos/" + TVNAME + r".mp4"
-            dst = r"../BCTC/media/RemoteVideos/" + TVNAME + r".mp4"
+            dst = r"C:/RemoteVids/" + TVNAME + r".mp4"
             os.remove(src)
             os.remove(dst)
             return redirect(config_tv)

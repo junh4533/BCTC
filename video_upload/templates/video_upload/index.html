@@ -49,35 +49,28 @@
         <div class="section-header">
             <h3>Status</h3>
         </div>
-        <div class="section-body">
+        <div class="section-body" id="test">
             <table id="status" class="table table-borderless">
                 <tbody>
                     {% for response in responses %}
-                    <tr style="padding:0">
-                        {% comment %} <td>
-                            {{response.1}} {# tv name #}
-                        </td> {% endcomment %}
-                        <td style="padding:0">
-                            {{response.1}}
-                            {% if response.2 == 0 %} {# tv status #}
-                            <i class="fa fa-power-off online"></i>
-                            {% else %}
-                            <i class="fa fa-power-off offline"></i>
-                            {% endif %}
-                            {% with tv_name=response.1 %}
-                            <span onclick="preview_video('{{ tv_name }}');" class="fa fa-play-circle"></span> <br>
-                            {% endwith %}
-                        </td style="padding:0">
+                    <tr>
+                        <td>{{response.1}}</td>
+                        {% if response.2 == 0 %} {# tv status #}
+                        <td><i class="fa fa-power-off online"></i> </td>    
+                        {% else %}
+                        <td><i class="fa fa-power-off offline"></i></td>
+                        {% endif %}
+                        {% with tv_name=response.1 %}
+                        <td><span onclick="preview_video('{{ tv_name }}');" class="fa fa-play-circle"></span></td>
+                        {% endwith %}
                     </tr>
-                    <td style="padding:0">
-                            <strong style="font-size: 10px;">Uploaded: {{response.3}}</strong>
-                    </td>
+                    <tr>
+                        <td><strong style="font-size: 10px;">Uploaded: {{response.3}}</strong></td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-
-
     </div>
 
     <div class="col-9">
