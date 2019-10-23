@@ -238,11 +238,34 @@ div [class*='col-']{
 }
 
 table,tbody, #test{
-  height:25vh !important;
-  overflow-y: scroll;
+  height:60vh !important;
+  overflow-y: auto;
 }
 
-td{
+td,tr{
   padding: 0 0 0 0 !important;
+  margin:0;
+  display:inline;
+}
+#upload{
+  display:block;
 }
 
+::-webkit-scrollbar{
+  width:10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: white;
+  
+}
+
+.col-10{
+  height:100vh;
+}
+
+.col-9{
+  height:75vh;
+}
+.col-3{
+  height:75vh;
+}

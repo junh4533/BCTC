@@ -11,8 +11,6 @@ import shutil
 import subprocess
 from celery import task
 
-
-
 def index(request):
     username = request.user.username
     responses = []
@@ -26,7 +24,7 @@ def index(request):
             print(date)
             responses.append([tv.tv_id, tv.tv_name, response, date])
         except Document.DoesNotExist: #error handling for tv not with no document uploaded 
-            date = str('TV has no video attached')
+            date = str('TV has no video')
             responses.append([tv.tv_id, tv.tv_name, response, date])
 
     print(responses)
@@ -97,10 +95,13 @@ def config_tv(request):
             TVNAME = Television.objects.get(tv_id=tv1).tv_name
             Television.objects.get(tv_id=tv1).delete()
             messages.error(request,'TV was deleted')
-            src = r"../BCTC/media/videos/" + TVNAME + r".mp4"
-            dst = r"C:/RemoteVids/" + TVNAME + r".mp4"
-            os.remove(src)
-            os.remove(dst)
+            try:
+                src = r"../BCTC/media/videos/" + TVNAME + r".mp4"
+                dst = r"C:/RemoteVids/" + TVNAME + r".mp4"
+                os.remove(src)
+                os.remove(dst)
+            except:
+                pass
             return redirect(config_tv)
 
         elif '_edit_tv' in request.POST:

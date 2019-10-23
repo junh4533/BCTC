@@ -50,22 +50,22 @@
             <h3>Status</h3>
         </div>
         <div class="section-body" id="test">
-            <table id="status" class="table table-borderless">
+            <table id="status" class="table table-borderless scrollbar">
                 <tbody>
                     {% for response in responses %}
                     <tr>
-                        <td>{{response.1}}</td>
+                        {% with tv_name=response.1 %}
+                        <td><span onclick="preview_video('{{ tv_name }}');" class="fa fa-play-circle"></span></td>
+                        {% endwith %}
                         {% if response.2 == 0 %} {# tv status #}
                         <td><i class="fa fa-power-off online"></i> </td>    
                         {% else %}
                         <td><i class="fa fa-power-off offline"></i></td>
                         {% endif %}
-                        {% with tv_name=response.1 %}
-                        <td><span onclick="preview_video('{{ tv_name }}');" class="fa fa-play-circle"></span></td>
-                        {% endwith %}
+                        <td>{{response.1}}</td>
                     </tr>
                     <tr>
-                        <td><strong style="font-size: 10px;">Uploaded: {{response.3}}</strong></td>
+                        <td id=upload><strong style="font-size: 10px;">Uploaded: {{response.3}}</strong></td>
                     </tr>
                     {% endfor %}
                 </tbody>
