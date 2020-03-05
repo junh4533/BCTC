@@ -26,8 +26,8 @@
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col">
-                    {% comment %} {{form.upload_date|as_crispy_field}} {% endcomment %}
-                    {{ form.document|as_crispy_field }}
+                    Document*
+                    {{ form.document}}
                 </div>
                 <div class="form-group col">
                     {{ form.tv|as_crispy_field }}

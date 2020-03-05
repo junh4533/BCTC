@@ -19,7 +19,7 @@ class Config(models.Model):
 class Document(models.Model):
     def file_path(self, tv):
         # removes the original file
-        path =  "../BCTC/media/videos/" + str(self.tv) + ".mp4"
+        path =  r"C:/Users/Administrator/Desktop/Django_project/BCTC/media/videos/" + str(self.tv) + r".mp4"
         if os.path.isfile(path):
             os.remove(path)
             print('File deleted')

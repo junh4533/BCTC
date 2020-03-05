@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c_4vb7yq)$d-=zks4n#%mlo+f2)z43*4xz0_hai&zxtp!bu_xb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*'] ############# NOT SECURE
+ALLOWED_HOSTS = ['127.0.0.1','localhost','videoportal','10.30.122.45','testingvideo',] ############# NOT SECURE
 
 
 # Application definition
@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'video_upload/static')
 # login 
 LOGIN_REDIRECT_URL = '../../'
 

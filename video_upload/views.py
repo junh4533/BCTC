@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 import time
 import shutil
 import subprocess
-from celery import task
+# from celery import task
 
 def index(request):
     username = request.user.username
@@ -54,7 +54,7 @@ def index(request):
                         print('valid form')
                         form.save()
                         print("saved")
-                        src = r"../BCTC/media/videos/" + TVName + r".mp4"
+                        src = r"C:/Users/Administrator/Desktop/Django_project/BCTC/media/videos/" + TVName + r".mp4"
                         dst = r"C:/RemoteVids/" + TVName + r".mp4"
                         shutil.copy(src, dst, follow_symlinks=True)
                         print('moved')
@@ -96,7 +96,7 @@ def config_tv(request):
             Television.objects.get(tv_id=tv1).delete()
             messages.error(request,'TV was deleted')
             try:
-                src = r"../BCTC/media/videos/" + TVNAME + r".mp4"
+                src = r"C:/Users/Administrator/Desktop/Django_project/BCTC/media/videos/" + TVNAME + r".mp4"
                 dst = r"C:/RemoteVids/" + TVNAME + r".mp4"
                 os.remove(src)
                 os.remove(dst)
